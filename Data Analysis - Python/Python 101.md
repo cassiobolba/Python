@@ -21,11 +21,42 @@
 
 ## INTRODUCTION  
 This project is going to use the following Python Packages:  
-* **NumPy:** or Numerical Python, for array of objects, read arrays from disk, element-wise computations with multidimensional arrays, algebra, fourier transform, random number generation, and integration with C, C++ and Fortran;    
-* **Pandas:** pandas combines the high performance array-computing features of NumPy with the flexible  ata manipulation capabilities of spreadsheets and  elational databases (such as SQL). Perform time-series functionality. It means, panel data, and econometric term for structured data.   
-* **matplotlib:** Produce plots and other 2D data visualizations. It is well-suited for creating plots  suitable for publication. It integrates with IPython providing a comfortable interactive environment for plotting and exploring data;    
-* **IPython:** Robust interface that offers interactive and exploratory shell to work along the projects. offer html notebook to connect with python, GUI console, infra for distributing computing;    
-* **SciPy:** Collection of packs that can solve some problems of scientific computing such as algebra, statistics, signal processsing, linear systems...;  
+**NumPy:** or Numerical Python, for array of objects, read arrays from disk, element-wise computations with multidimensional arrays, algebra, fourier transform, random number generation, and integration with C, C++ and Fortran;    
+
+**Pandas:** pandas combines the high performance array-computing features of NumPy with the flexible  ata manipulation capabilities of spreadsheets and  elational databases (such as SQL). Perform time-series functionality. It means, panel data, and econometric term for structured data.   
+* Panda is very good in data munging and prep, but not in analysing and modeling;  
+* Good Series, Data Frame and Panel Data Type;  
+* I/O tools, between in memory nad csv, excel, sql;  
+* Handle missing data;  
+* Reshape data;  
+* Slicing, fancy indexing, subsetting;  
+* Merging and joining;  
+* Performance;  
+* Axis indexing;  
+* Time series;  
+
+### CONDA COMMAND  
+you can use comands in conda to install, update and delete packages;  
+To add Numpy, MatPlotLib and Pandas do the following:  
+* go to search on system ad type anaconda;  
+* open the "anaconda prompt" (similiar to cmd);  
+* type "python";  
+* type "import pandas", after type "import numpy" and then "import matplotlib";    
+
+### JUPYTER NOTEBOOK / JUPYTER LAB  
+Lauch jupyter lab:  
+* go to search on system ad type anaconda;  
+* open the "anaconda prompt" (similiar to cmd);  
+* type "jupyter lab";  
+
+Shift + enter = run selected cells  
+B = Add lines
+X = Delete lines  
+
+
+
+
+ 
 
 ### Import Conventions:  
 ```py
