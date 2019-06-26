@@ -32,7 +32,7 @@ Why Python:
 * Open Source;  
 * Jupyter Notebook, programação via browser;  
 * Facilidade de aprender;  
-* Escalabilidade (fáciil de escalar o tamanho dos projetos) e portabilidade (win, linux, mac);  
+* Escalabilidade (fácil de escalar o tamanho dos projetos) e portabilidade (win, linux, mac);  
 
 **PyData Stack:**   
 Pack de pacotes prontos para uso em projetos; 
@@ -46,4 +46,16 @@ Sugestão de IDE = PyCharm , Rodeo, Spyder
 DSA não recomenda usar Jupyter Lab pelo Conda NAvigador, mas chamar pelo prompt de comando:  
 abra cmd > cd .. > cd .. 
 
+**Executar pelo cmd**  
+nome_da_engine nome_arquivo.py    
+python hello.py  
 
+Para habilitar a execução do python via cmd, deve ter clicado na caixa "add python ao path". Se nã, siga esse tutorial: 
+
+https://dicasdepython.com.br/resolvido-python-nao-e-reconhecido-como-um-comando-interno/  
+
+Para usar direto o shell do python, digite apenas python. 
+dentro do shell, você pode executar codigos de python
+
+**Bibliografia Recomendada**  
+python.org
