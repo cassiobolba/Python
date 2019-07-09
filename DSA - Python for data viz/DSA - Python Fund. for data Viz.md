@@ -214,4 +214,130 @@ fullName = nome + " " + sobrenome
 fullName
 'Steve Jobs'
 ```
- 
+
+### 2.3 Strings:  
+texto, sequência de caracteres imutáveis.  
+Pode-se usar indexação.  
+* Indexação: utiliza-se dentro de colchetes []  
+ex: "Python"  
+Para chamar só a letra P =  
+
+```py
+texto[0]  
+#Vai retornar P
+texto[2]
+# Vai retornar t
+```
+A contagem na indexação começa por 0,1,2,3,...  
+
+**Funções built-in de Strings**  
+linguagem orientada a objeto, logo os dados possuem **ATRIBUTOS** (propriedades) e **MÉTODOS** (rotinas associadas a prop.). Ambos são acessados usando "." .  
+EX:  
+objeto.atributo
+objeto.método(parâmetro) (em métodos podemos usar parâmetros)  
+```py
+Print('test')
+# Printa a string test
+
+Print('\ntest')
+# Printa a string test com espaço antes 
+
+s = 'Data Science'
+# Atribui valor a string  
+
+s[0]  
+# Retorna D  
+
+s[-1]   
+# Retorna e (último item de trás pra frente)    
+
+###### SLICINNG ######  
+s[1:]  
+# Retorna todos os elementos da string, começando pela posição (lembre-se que Python começa a indexação pela posição 0), até o fim da string = 'ata Science'  
+
+s[:3]  
+# Retorna tudo até a posição, menos a posição 3 = 'Dat'    
+
+s[:-1]
+# Retornar tudo, exceto a última letra = 'Data Scienc'  
+
+s[::1]  
+# dois pontos retorna tudo a cada contagem do num add depois = 'Data Science'  (não pulou nenhum, pois pega 1 por 1)
+s[::2]  
+# Retorna 'Dt cec' pois pega a cada duas, 1 letra. 
+```  
+
+**Propriedades de String**  
+```py
+a = 'Cassio'  
+b = 'Lindo'  
+c = a + ' ' + b  
+# Concatenação Retorna 'Cassio Lindo  
+  
+d = a * 2  
+# Retorna 'CassioCassio'  
+```
+
+**Funções String**
+```py
+s = 'seja bem vindo ao universo de python'
+
+s.capitalize()
+'Seja bem vindo ao universo de python'
+
+s.count('a')
+2
+
+s.find('p')
+30
+
+s.center(20, 'z')
+'seja bem vindo ao universo de python'
+
+s.isalnum()
+False
+
+s.isalpha()
+False
+
+s.islower()
+True
+
+s.isspace()
+False
+
+s.endswith('o')
+False
+
+s.partition('!')
+('seja bem vindo ao universo de python', '', '')
+
+#Comparando Strings
+print("Python" == "R")
+False
+print("Python" == "Python")
+True
+```
+
+**Funções Built-in de Strings**
+```py
+s
+'Data Science'
+
+# Upper Case 
+s.upper()
+'DATA SCIENCE'
+
+# Lower case
+s.lower()
+'data science'
+
+# Dividir uma string por espaços em branco (padrão)
+s.split()
+
+['Data', 'Science']
+# Dividir uma string por um elemento específico
+
+s.split('y')
+['Data Science']
+```
