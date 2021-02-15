@@ -1,4 +1,4 @@
-# Principais Comando
+# Principais Comandos
 https://beam.apache.org/documentation/transforms/python/overview/
 ## Instalar Pacotes
 * Requer C++ acima de 14.0 (baixar no site do visual studio)
