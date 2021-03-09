@@ -1,5 +1,3 @@
-<img src="https://github.com/cassiobolba/Data-Engineering/blob/master/src/img/2%20-%20Streamlined%20data%20with%20pandas/fig%201%20-%20Dataframe.JPG?raw=true"/>   
-fig 1 - Dataframes 
 
 # WRITTING EFFICIENT PYTHON CODE
 
@@ -61,25 +59,65 @@ print(best_list)
   * collections
   * math
 
-#### Range()
+#### **Range()**
 * Creates a range of values
 ```py
-# start para, end param, increment between params
-even = range(1,11,2)
+# Create a range object that goes from 0 to 5
+nums = range(6)
+print(type(nums))
+
+# Convert nums to a list
+nums_list = list(nums)
+print(nums_list)
+
+# Create a new list of odd numbers from 1 to 11 by unpacking a range object
+# * is for unpacking and kind of replace the for loop
+nums_list2 = [*range(1,12,2)]
+print(nums_list2)
 ```
 
-#### Enumerate()
+#### **Enumerate()**
 * Creates index for each element in a list
+* Suppose you had a list of people that arrived at a party you are hosting. The list is ordered by arrival (Jerry was the first to arrive, followed by Kramer, etc.):
 ```py
-letters = ['a','b','c']
-indexed_letters = enumerate(letters)
-print(indexed_letters)
+names = ['Jerry', 'Kramer', 'Elaine', 'George', 'Newman']
+
+# Rewrite the for loop to use enumerate
+indexed_names = []
+for i,name in enumerate(names):
+    index_name = (i,name)
+    indexed_names.append(index_name) 
+print(indexed_names)
+
+# Rewrite the above for loop using list comprehension
+indexed_names_comp = [(i,names) for i,name in enumerate(names)]
+print(indexed_names_comp)
+
+# Unpack an enumerate object with a starting index of one
+indexed_names_unpack = [*enumerate(names, 1)]
+print(indexed_names_unpack)
+
 ```
 output = [(0,'a'),(1,'b'),(2,'c')]
 
-#### map()
+#### **map()**
 * Apply a funtion to each element in an object
 * first args is the function to apply, second is the element
+* Suppose you wanted to create a new list (called names_uppercase) that converted all the letters in each name to uppercase. you could accomplish this with the below for loop:
+```py
+names = ['Jerry', 'Kramer', 'Elaine', 'George', 'Newman']
+# Use map to apply str.upper to each element in names
+names_map  = map(str.upper, names)
+
+# Print the type of the names_map
+print(type(names_map))
+
+# Unpack names_map into a list
+names_uppercase = [*names_map]
+
+# Print the list created above
+print(names_uppercase)
+```
 ```py
 nums = [1.5,2.6,3.4]
 round_nums = map(round,nums)
@@ -91,4 +129,51 @@ output = [1,3,3]
 nums = [1,2,3]
 sqrd = map(lambda x: x ** 2, nums)
 print(sqrd)
+```
+
+### The power of Numpy arrays
+* Fundamental package for data a numerical operations
+* It is usually faster than built in python funcs
+* Are homogeneous, all elements in an array must be same type
+* It convert numbers to same type
+* By removing the need to identify the type, it becomes fastes
+```py
+nums = list(range(5))
+# [0,1,2,3,5]
+import numpy as np
+num_np = np.array(range(5))
+# ([0,1,2,3,4])
+```
+#### Numpy array Broadcasting
+* NP allow broadcasting
+* Lists in python don't do
+* Ex: want to multiply all elements in a lsit by a number:
+  * can't do directly
+  * have to create a for loop
+  * or create a list comprehension
+* None of these approaches are faster then numpy
+```py
+nums = np.array([1,2,3])
+nums ** 2
+# array([1,4,9])
+# this is not allowed in lists
+```
+#### Numpy indexing
+* For 1D lists, not much difference
+* For 2D lists the sintaxe of numpy is simpler and faster:
+
+<img src="4-numpy_indexing"/>   
+fig 1 - numpy_indexing
+
+#### Numpy array Boolean indexing
+* Easy way to filter or get values based on a true of false condition:
+```py
+nums = [-1,-2,3,4]
+nums_np = np.array(nums)
+
+nums_np > 0
+# >>> array ([false,false,true,true])
+
+nums_np[nums_np >0]
+# >>> array ([3,4])
 ```
