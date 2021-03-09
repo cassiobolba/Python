@@ -164,6 +164,24 @@ nums ** 2
 <img src="https://github.com/cassiobolba/Python/blob/master/Python-Datacamp/src-img/4-numpy_indexing.jpg"/>   
 fig 1 - numpy_indexing
 
+```py
+nums = np.array([[ 1  2  4  4  5]
+                [ 6  7  9  9 10]])
+# Print second row of nums
+print(nums[1,:])
+
+# Print all elements of nums that are greater than six
+print(nums[nums > 6])
+
+# Double every element of nums
+nums_dbl = nums * 2
+print(nums_dbl)
+
+# Replace the third column of nums
+nums[:,2] = nums[:,2] + 1
+print(nums)
+```
+
 #### Numpy array Boolean indexing
 * Easy way to filter or get values based on a true of false condition:
 * To do the same in lists, need to create a list comprehension or for loop
@@ -176,4 +194,23 @@ nums_np > 0
 
 nums_np[nums_np >0]
 # >>> array ([3,4])
+```
+
+#### Execise
+```py
+# List from 10 to 50, incremented by 10
+# Create a list of arrival times
+arrival_times = [*range(10, 60, 10)]
+print(arrival_times)
+# You realize your clock is three minutes fast. Convert the arrival_times list into a numpy array 
+# (called arrival_times_np) and use NumPy broadcasting to subtract three minutes from each arrival time.
+# Convert arrival_times to an array and update the times
+arrival_times_np = np.array(arrival_times)
+new_times = arrival_times_np - 3
+# Use list comprehension with enumerate() to pair each guest in the names list to their updated arrival 
+# time in the new_times array. You'll need to use the index variable created from using enumerate() 
+# on new_times to index the names list.
+# Use list comprehension and enumerate to pair guests to new times
+guest_arrivals = [(names[i],time) for i,time in enumerate(new_times)]
+
 ```
