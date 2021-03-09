@@ -1,5 +1,4 @@
 # WRITTING EFFICIENT PYTHON CODE
-
 ## Foundations for efficiencies
 
 * Write clean as faster codes
