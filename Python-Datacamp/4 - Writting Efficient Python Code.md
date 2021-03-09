@@ -40,6 +40,7 @@ print(best_list)
 
 ### Building with built-ins
 * Part of standard python installation
+* Perform faster
 * Built in types:
   * list
   * tuple
