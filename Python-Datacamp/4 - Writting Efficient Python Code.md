@@ -162,11 +162,12 @@ nums ** 2
 * For 1D lists, not much difference
 * For 2D lists the sintaxe of numpy is simpler and faster:
 
-<img src="4-numpy_indexing"/>   
+<img src="https://github.com/cassiobolba/Python/blob/master/Python-Datacamp/src-img/4-numpy_indexing.jpg"/>   
 fig 1 - numpy_indexing
 
 #### Numpy array Boolean indexing
 * Easy way to filter or get values based on a true of false condition:
+* To do the same in lists, need to create a list comprehension or for loop
 ```py
 nums = [-1,-2,3,4]
 nums_np = np.array(nums)
