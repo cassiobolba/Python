@@ -1,4 +1,3 @@
-
 # WRITTING EFFICIENT PYTHON CODE
 
 ## Foundations for efficiencies
