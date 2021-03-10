@@ -196,7 +196,7 @@ nums_np[nums_np >0]
 # >>> array ([3,4])
 ```
 
-#### Execise
+#### Exercise
 ```py
 # List from 10 to 50, incremented by 10
 # Create a list of arrival times
@@ -213,4 +213,46 @@ new_times = arrival_times_np - 3
 # Use list comprehension and enumerate to pair guests to new times
 guest_arrivals = [(names[i],time) for i,time in enumerate(new_times)]
 
+```
+
+## Timing and profiling code
+### Examining runtime
+* Comparing run time allow us to pick the fastest code
+* Calculate runtime with Ipython magic command %timeit
+```py
+# pass the magic command before the code to measure
+%timeit rand_nums = np.random.rand(1000)
+```
+* It outputs the mean time + std dev, number or runs and loops in each run
+* It does multiple runs in order to get more acurate results than measring only one run
+* Can set the number or runs and loops using -r and -n
+```py
+%timeit -r2 -n10 rand_nums = np.random.rand(1000)
+```
+* if using one % it runs in only one line
+* If passing two %% it runs on multiple lines code
+```py
+# pass the magic command before the code to measure
+%%timeit
+nums = []
+for x in range(10):
+  nums.append(x)
+```
+* Can save the time output to a variable, passing the value -o
+```py
+times = %timeit -o rand_nums = np.random.rand(1000)
+```
+* Then can use few methods to analyze the ouputs
+  * times.timings (list of times saved)
+  * times.best (best timing saved)
+  * times.worst
+* It allow to compare runtime
+```py
+# measuring the time to create a formal dict
+f_time = %timeit -o formal_dict = dict()
+# measuring the time to crete an informal dict
+l_time = %timeit -o literal_dict = {}
+# comaparing the runtime
+diff = (f_time.average - l_time.average) * (10**9)
+print(f"the difference it {diff}")
 ```
