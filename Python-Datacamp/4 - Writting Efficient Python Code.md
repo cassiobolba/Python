@@ -88,7 +88,7 @@ for i,name in enumerate(names):
 print(indexed_names)
 
 # Rewrite the above for loop using list comprehension
-indexed_names_comp = [(i,names) for i,name in enumerate(names)]
+indexed_names_comp = [(i,name) for i,name in enumerate(names)]
 print(indexed_names_comp)
 
 # Unpack an enumerate object with a starting index of one
