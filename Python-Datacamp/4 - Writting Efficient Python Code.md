@@ -255,3 +255,19 @@ l_time = %timeit -o literal_dict = {}
 diff = (f_time.average - l_time.average) * (10**9)
 print(f"the difference it {diff}")
 ```
+### Coding Profilling for Runtime
+* Describe how often and how often something is executed
+* Line-by-line analyses
+* package used: *pip install line_profiler*
+* timeit would only give the total function time, or you would need to declate time it in every single line of the function
+* After install the package:
+```py
+# load the profiler in the session
+%load_ext line_profiler
+# use the lprun, -f flag to tell your are timming a function
+# tell the function name, and then use the function as usuall
+%lprun -f convert_units convert_units(heroes, hts, wts)
+```
+* It ouputs a nice table with many good performance info:  
+<img src="https://github.com/cassiobolba/Python/blob/master/Python-Datacamp/src-img/line_profiler_output.jpg"/>     
+fig 2 - line profiler output
