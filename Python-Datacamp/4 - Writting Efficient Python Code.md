@@ -306,3 +306,41 @@ from my_funcs import convert_units
 * The output is pretty much the same as lprun, but with memory data (in mb)
 * It queries memory usage by the system, so it may vary a little at every run
 * But you can still get good insights from it
+
+### Gaining efficiencies
+#### Combinining, counting and iterating
+Let's say we have a list os pokemons and we want to combine:
+```py
+names = ['Bulbasaur','Charmander','Squirtle']
+hps = [45,39,44]
+
+combined = []
+
+for i,pokemon in enumerate(names):
+  combined.append((pokemon,hps[i]))
+
+print(combined)
+```
+But this is not elegant and efficient.  
+Then, use Zip:
+```py
+names = ['Bulbasaur','Charmander','Squirtle']
+hps = [45,39,44]
+
+combined_zip = zip(names, hps)
+# combined zip is packed, then use * to unpack
+combined_zip_list [*combined_zip]
+print(combined_zip_list)
+```
+#### Collection Module
+* Standard library
+* Specialized datatypes as alternative to: dict, list, set and tuple
+* The notable ones:
+  * namedtuple: 
+  * deque: fast list for append and pop
+  * Counter: dict for counting hashable objects
+  * OrderedDict: dict that retain order of entries
+  * defaultdict: dict that calls a factory function to supply missing values
+
+
+
