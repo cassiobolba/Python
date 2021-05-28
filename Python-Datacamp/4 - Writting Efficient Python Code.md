@@ -271,3 +271,38 @@ print(f"the difference it {diff}")
 * It ouputs a nice table with many good performance info:  
 <img src="https://github.com/cassiobolba/Python/blob/master/Python-Datacamp/src-img/line_profiler_output.jpg"/>     
 fig 2 - line profiler output
+
+### Coding Profilling for Memory Usage
+Can use sys lib to inspect the size of an object, this is the quick and dirty way:
+```py
+import sys
+num_list [*range(1000)]
+sys.getsizeof(num_list)
+# output: 9112
+```
+To check the memory footprint, can use a memory_profiler lib:
+* Detailed stats on memory consumption
+* line-by-line analyses
+```py
+# install the lib
+pip install memory_profiler
+# load to session
+%load_ext memory_profiler
+# use it on the function, similar to lprun
+%mprun -f convert_units convert_units (heroes, hts, wts)
+```
+Drawbacks:
+* Functions must be imported when using memory_profiler
+* must create a function in a .py file and import it another session that is loading the memory profiler
+```py
+# This func was created and placed in the same folder
+# my_funcs is my files that is containing the convert_units function
+from my_funcs import convert_units
+# load to session
+%load_ext memory_profiler
+# use it on the function, similar to lprun
+%mprun -f convert_units convert_units (heroes, hts, wts)
+```
+* The output is pretty much the same as lprun, but with memory data (in mb)
+* It queries memory usage by the system, so it may vary a little at every run
+* But you can still get good insights from it
