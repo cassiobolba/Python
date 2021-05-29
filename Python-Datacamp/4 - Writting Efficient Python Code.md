@@ -439,3 +439,85 @@ To combine the sets, creating unique values (even if in both sets, it won't be r
 set_a.union(set_b)
 ```
 Use set also to create unique list, instead of creating for loops to check if an intem in a list is new or not.
+
+#### Eliminating Loops
+Looping is a common practice in python. There are few patterns:
+* for loops: iterate over a sequence puece-by-piece
+* while loop: iterate until a condition is met
+* nested loops: one loop inside another
+Using multiple loops are costly, inefficient and time consuming. If we follow the zen of python "flat is better", we are actually reducing loops and and flattening the code for more efficiency.  
+Let's say we want to sum every list inside the list, there are many ways to do it:
+```py
+stats = [ 
+  [90,92,75,60],
+  [20,25,15,90],
+  [65,130,60,75]
+]
+# non pythonic way
+totals = []
+for row in stats:
+  totals.append(sum(row))
+print(totals)
+
+# using list comprehension
+totals_comp = print([sum(row) for row in stats])
+
+# using map function
+totals_map = print(*map(sum,stats))
+```
+You can also use numpy to eliminate arrays, qhen want to perform calculations:
+```py
+stats = np.array([ 
+  [90,92,75,60],
+  [20,25,15,90],
+  [65,130,60,75]
+])
+import numpy as np
+sum_np = stats.sum(axis=1)
+print(sum_np)
+```
+
+#### Writting Better Loops
+There are times where loops as unavoidable! So, follow some good practices for writting loops:
+* Understand what is being done with each loop iteration
+* Move one-time calculations outside (above) the loop
+* Use holistic conversions outrside (below) the loop
+* Anything that is done once should be outside the loop
+Example, we want to find the pokemons with attack power greater than average (considering that this is the only option):
+```py
+pkm = np.array(['Bulbasaur','Charmander','Squirtle','Pikachu'])
+atck = np.array([130,110,65,95])
+
+for i,j in zip (pkm,atck):
+  total_attack_avg = atck.mean()
+  if j > total_attack_avg:
+    print(
+      "{}'s attack is greater than average : {}!".format(i,total_attack_avg)
+    )
+```
+The variable *total_attack_avg* should be calculated only once, because if it is inside the loop, it is being calculated every time, but the values is the same. This one-time calculation should be moved to above the for loop. Test with %timeit and find the performance difference.   
+Another example is when you want to create a list of list combining lists. If you use zip, it returns a tuple that you need to convert to a list. If you do inside the loop, it is less efficient that doing outside the loop:
+```py
+#  %%timeit
+pkm = ['Bulbasaur','Charmander','Squirtle','Pikachu']
+atck = [130,110,65,95]
+lgnd = [True, False,True, False]
+poke_data = []
+for poke_tuple in zip(pkm,atck,lgnd):
+  poke_list = list(poke_tuple)  
+  poke_data.append(poke_list)
+print(poke_data)
+```
+The approach above is less efficient, below we see a solution moving the holistic conversion outside the loop, and doing at once:
+```py
+# %%timeit
+pkm = ['Bulbasaur','Charmander','Squirtle','Pikachu']
+atck = [130,110,65,95]
+lgnd = [True, False,True, False]
+poke_data_tuples = []
+for poke_tuple in zip(pkm,atck,lgnd):
+  poke_data_tuples.append(poke_tuple)
+
+poke_data = print([*map(list, poke_data_tuples)])
+```
+Use the timeit function to compare both performances!
