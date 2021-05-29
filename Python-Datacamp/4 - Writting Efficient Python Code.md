@@ -394,4 +394,48 @@ combos_exp = [*combos]
 print(combos_exp)
 ```
 
+#### Set Theoty
+We oftenlly want to compare collection of objects, it works better with set types.
+* Python has built-in set datatype with some mehtods:
+  * intersection(): check if all elements are in both sets
+  * difference(): check elements in one set but not in other
+  * symetric_difference(): all elements in exaclty one set
+  * union(): all elements that are in either sets
+Sets are used for efficient membership testing:
+* Check if a value exisst in a sequence or not
+* use in operator in sets are more perfomrnat than using in regular lists
 
+##### Comparing Objects
+We could use a logical for loop to find elements present in both lists:
+```py
+names_a = ['Bulbasaur','Charmander','Squirtle','Pikachu']
+names_b = ['Bulbasaur','Pidgey','Caterpie','Pikachu']
+common = []
+for poke_a in names_a:
+  for poke_b in names_b:
+    if poke_a == poke_b:
+      common.append(poke_a)
+print(common)
+```
+This is extremelly not efficient! Instead, use set data type:
+```py
+set_a = set(names_a)
+set_b = set(names_b)
+set_a.intersection(set_b)
+```
+To check the pokemons in one list but not in the other:
+```py
+# what is in a but not in b
+set_a.difference(set_b)
+# or the opposite, what is b but not in a
+set_b.difference(set_a)
+```
+To check what is in only one set, not in both
+```py
+set_a.symmetric_difference(set_b)
+```
+To combine the sets, creating unique values (even if in both sets, it won't be repeated)
+```py
+set_a.union(set_b)
+```
+Use set also to create unique list, instead of creating for loops to check if an intem in a list is new or not.
