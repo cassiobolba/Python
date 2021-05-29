@@ -342,5 +342,56 @@ print(combined_zip_list)
   * OrderedDict: dict that retain order of entries
   * defaultdict: dict that calls a factory function to supply missing values
 
+##### collections.Counter()
+We want to count the number each value appears in a list. The non-pythonic approach, and not efficient:
+```py
+names = ['Bulbasaur','Charmander','Squirtle','Bulbasaur','Charmander','Squirtle','Bulbasaur']
+type_counts = {}
+for poke_type in names:
+  if poke_type not in type_counts:
+    type_counts[poke_type] = 1
+  else:
+    type_counts[poke_type] += 1
+print(type_counts)
+```
+To do in a pythonic way, use the collection.Counter() function, it is faster, easier to read, and it is also ordered by the highest count:
+```py
+names = ['Bulbasaur','Charmander','Squirtle','Bulbasaur','Charmander','Squirtle','Bulbasaur']
+from collections import Counter
+type_counts = Counter(names)
+print(type_counts)
+```
+#### itertools Module
+* Part of standard libraries
+* Functional tools for creating iterators
+* te notable ones:
+  * infinite iterators: count, cycle, repeat
+  * Finite iterators: accumnulate, chain, zip_longest
+  * Combination generators: product, permutation, combinations
+
+##### itertools.Combinations()
+If we want to create all possible combinations, we could do it with for loops, but it is not very efficient:
+```py
+names = ['Bulbasaur','Charmander','Squirtle','Pikachu']
+combos = []
+
+for x in names:
+  for y in names:
+    # condition to eliminate equal combinations
+    if x == y:
+      continue
+    # condition to check if either combinations are already in the list
+    if ((x,y) not in combos) & ((y,x) not in combos):
+      combos.append((x,y))
+print(combos)
+```
+Using the itertools:
+```py
+names = ['Bulbasaur','Charmander','Squirtle','Pikachu']
+from itertools import combinations
+combos = combinations(names,2)
+combos_exp = [*combos]
+print(combos_exp)
+```
 
 
