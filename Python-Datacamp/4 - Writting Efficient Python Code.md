@@ -307,8 +307,8 @@ from my_funcs import convert_units
 * It queries memory usage by the system, so it may vary a little at every run
 * But you can still get good insights from it
 
-### Gaining efficiencies
-#### Combinining, counting and iterating
+## Gaining efficiencies
+### Combinining, counting and iterating
 Let's say we have a list os pokemons and we want to combine:
 ```py
 names = ['Bulbasaur','Charmander','Squirtle']
@@ -332,7 +332,7 @@ combined_zip = zip(names, hps)
 combined_zip_list [*combined_zip]
 print(combined_zip_list)
 ```
-#### Collection Module
+### Collection Module
 * Standard library
 * Specialized datatypes as alternative to: dict, list, set and tuple
 * The notable ones:
@@ -342,7 +342,7 @@ print(combined_zip_list)
   * OrderedDict: dict that retain order of entries
   * defaultdict: dict that calls a factory function to supply missing values
 
-##### collections.Counter()
+#### collections.Counter()
 We want to count the number each value appears in a list. The non-pythonic approach, and not efficient:
 ```py
 names = ['Bulbasaur','Charmander','Squirtle','Bulbasaur','Charmander','Squirtle','Bulbasaur']
@@ -361,7 +361,7 @@ from collections import Counter
 type_counts = Counter(names)
 print(type_counts)
 ```
-#### itertools Module
+### itertools Module
 * Part of standard libraries
 * Functional tools for creating iterators
 * te notable ones:
@@ -369,7 +369,7 @@ print(type_counts)
   * Finite iterators: accumnulate, chain, zip_longest
   * Combination generators: product, permutation, combinations
 
-##### itertools.Combinations()
+#### itertools.Combinations()
 If we want to create all possible combinations, we could do it with for loops, but it is not very efficient:
 ```py
 names = ['Bulbasaur','Charmander','Squirtle','Pikachu']
@@ -394,7 +394,7 @@ combos_exp = [*combos]
 print(combos_exp)
 ```
 
-#### Set Theoty
+### Set Theoty
 We oftenlly want to compare collection of objects, it works better with set types.
 * Python has built-in set datatype with some mehtods:
   * intersection(): check if all elements are in both sets
@@ -405,7 +405,7 @@ Sets are used for efficient membership testing:
 * Check if a value exisst in a sequence or not
 * use in operator in sets are more perfomrnat than using in regular lists
 
-##### Comparing Objects
+#### Comparing Objects
 We could use a logical for loop to find elements present in both lists:
 ```py
 names_a = ['Bulbasaur','Charmander','Squirtle','Pikachu']
@@ -440,7 +440,7 @@ set_a.union(set_b)
 ```
 Use set also to create unique list, instead of creating for loops to check if an intem in a list is new or not.
 
-#### Eliminating Loops
+### Eliminating Loops
 Looping is a common practice in python. There are few patterns:
 * for loops: iterate over a sequence puece-by-piece
 * while loop: iterate until a condition is met
@@ -477,7 +477,7 @@ sum_np = stats.sum(axis=1)
 print(sum_np)
 ```
 
-#### Writting Better Loops
+### Writting Better Loops
 There are times where loops as unavoidable! So, follow some good practices for writting loops:
 * Understand what is being done with each loop iteration
 * Move one-time calculations outside (above) the loop
@@ -521,3 +521,61 @@ for poke_tuple in zip(pkm,atck,lgnd):
 poke_data = print([*map(list, poke_data_tuples)])
 ```
 Use the timeit function to compare both performances!
+
+## Intro to pandas DataFrame iteration
+So far we used only standard libraries data, now we gonna use pandas lib and define the best practices for iterating over pandas. To recap:
+* Pandas in a data analysis Lib
+* Main data structure is the DF
+  * tabular data with labeled rows and columns
+  * Built on top of numpy array structure
+Creating the pandas df for studies: Baseball data!
+```py
+import pandas as pd
+data = [
+  ['ARI','NL',2012,734,688,81,162,0],
+  ['ATL','NL',2012,700,600,94,162,1],
+  ['BAL','AL',2012,712,705,93,162,1],
+  ['BOS','AL',2012,734,806,69,162,0],
+  ['CHC','NL',2012,613,759,61,162,0]
+]
+baseball_df = pd.DataFrame(data,columns = ['Team','League','Year','RS',"RA","W",'G','Playoffs'])
+df
+```
+### Calculating win percentage
+Let's say we want to cerate a column called win_percentage in our DF. First, create the formula to do the calculation.The formula to calculate win percentage is:
+```py
+import numpy as np
+def calc_win_perc(wins, games_played):
+  win_perc = wins / games_played
+  return np.round(win_perc,2)
+```
+Then, create the loop to iterate over the df and calculate for each row:
+```py
+win_perc_list = []
+# iterate the number of times equal to the number os rows in the df
+for i in range(len(baseball_df)):
+  # use the iloc to save the current row iteration in row variable as index
+  row = baseball_df.iloc[i]
+  # save the column regarding wins and games played in variables
+  wins = row['W']
+  games_played = row['G']
+  # use the function created before
+  win_perc = calc_win_perc(wins, games_played)
+  # append the result to list outside the loop
+  win_perc_list.append(win_perc)
+# finnaly, to create a new columns is very easy
+baseball_df['WP'] = win_perc_list
+```
+GREAT, DONE! But in a very inneficient way.   
+When it comes to iterating over row, pandas offer the command .iterrows():
+```py
+win_perc_list = []
+
+for i,row in baseball_df.iterrows():
+  wins = row['W']
+  games_played = row['G']
+  win_perc = calc_win_perc(wins, games_played)
+  win_perc_list.append(win_perc)
+baseball_df['WP'] = win_perc_list
+```
+The iterrows module saved 1 line in the code, but turned it in much more efficient, because I don't need to create my indexes, they are given by the function.
