@@ -1,5 +1,5 @@
 # WRITTING EFFICIENT PYTHON CODE
-## Foundations for efficiencies
+# Foundations for efficiencies
 
 * Write clean as faster codes
 * Profile code bottlenecks
@@ -8,7 +8,7 @@
   * Minimal completion time
   * Minimal resource consumption (memory footprint)
 
-### Pythonic Approach
+## Pythonic Approach
 * Focus on readability
 * Use pythons constructs as intended
 ```py
@@ -34,7 +34,7 @@ best_list = [name for name in names if len(name) >= 6]
 print(best_list)
 ```
 
-### Building with built-ins
+## Building with built-ins
 * Part of standard python installation
 * Perform faster
 * Built in types:
@@ -57,7 +57,7 @@ print(best_list)
   * collections
   * math
 
-#### **Range()**
+## **Range()**
 * Creates a range of values
 ```py
 # Create a range object that goes from 0 to 5
@@ -74,7 +74,7 @@ nums_list2 = [*range(1,12,2)]
 print(nums_list2)
 ```
 
-#### **Enumerate()**
+## **Enumerate()**
 * Creates index for each element in a list
 * Suppose you had a list of people that arrived at a party you are hosting. The list is ordered by arrival (Jerry was the first to arrive, followed by Kramer, etc.):
 ```py
@@ -98,7 +98,7 @@ print(indexed_names_unpack)
 ```
 output = [(0,'a'),(1,'b'),(2,'c')]
 
-#### **map()**
+## **map()**
 * Apply a funtion to each element in an object
 * first args is the function to apply, second is the element
 * Suppose you wanted to create a new list (called names_uppercase) that converted all the letters in each name to uppercase. you could accomplish this with the below for loop:
@@ -129,7 +129,7 @@ sqrd = map(lambda x: x ** 2, nums)
 print(sqrd)
 ```
 
-### The power of Numpy arrays
+## The power of Numpy arrays
 * Fundamental package for data a numerical operations
 * It is usually faster than built in python funcs
 * Are homogeneous, all elements in an array must be same type
@@ -142,7 +142,7 @@ import numpy as np
 num_np = np.array(range(5))
 # ([0,1,2,3,4])
 ```
-#### Numpy array Broadcasting
+## Numpy array Broadcasting
 * NP allow broadcasting
 * Lists in python don't do
 * Ex: want to multiply all elements in a lsit by a number:
@@ -156,7 +156,7 @@ nums ** 2
 # array([1,4,9])
 # this is not allowed in lists
 ```
-#### Numpy indexing
+## Numpy indexing
 * For 1D lists, not much difference
 * For 2D lists the sintaxe of numpy is simpler and faster:
 
@@ -181,7 +181,7 @@ nums[:,2] = nums[:,2] + 1
 print(nums)
 ```
 
-#### Numpy array Boolean indexing
+## Numpy array Boolean indexing
 * Easy way to filter or get values based on a true of false condition:
 * To do the same in lists, need to create a list comprehension or for loop
 ```py
@@ -195,7 +195,7 @@ nums_np[nums_np >0]
 # >>> array ([3,4])
 ```
 
-#### Exercise
+## Exercise
 ```py
 # List from 10 to 50, incremented by 10
 # Create a list of arrival times
@@ -214,8 +214,8 @@ guest_arrivals = [(names[i],time) for i,time in enumerate(new_times)]
 
 ```
 
-## Timing and profiling code
-### Examining runtime
+# Timing and profiling code
+## Examining runtime
 * Comparing run time allow us to pick the fastest code
 * Calculate runtime with Ipython magic command %timeit
 ```py
@@ -255,7 +255,7 @@ l_time = %timeit -o literal_dict = {}
 diff = (f_time.average - l_time.average) * (10**9)
 print(f"the difference it {diff}")
 ```
-### Coding Profilling for Runtime
+## Coding Profilling for Runtime
 * Describe how often and how often something is executed
 * Line-by-line analyses
 * package used: *pip install line_profiler*
@@ -272,7 +272,7 @@ print(f"the difference it {diff}")
 <img src="https://github.com/cassiobolba/Python/blob/master/Python-Datacamp/src-img/line_profiler_output.jpg"/>     
 fig 2 - line profiler output
 
-### Coding Profilling for Memory Usage
+## Coding Profilling for Memory Usage
 Can use sys lib to inspect the size of an object, this is the quick and dirty way:
 ```py
 import sys
@@ -307,8 +307,8 @@ from my_funcs import convert_units
 * It queries memory usage by the system, so it may vary a little at every run
 * But you can still get good insights from it
 
-## Gaining efficiencies
-### Combinining, counting and iterating
+# Gaining efficiencies
+## Combinining, counting and iterating
 Let's say we have a list os pokemons and we want to combine:
 ```py
 names = ['Bulbasaur','Charmander','Squirtle']
@@ -332,7 +332,7 @@ combined_zip = zip(names, hps)
 combined_zip_list [*combined_zip]
 print(combined_zip_list)
 ```
-### Collection Module
+## Collection Module
 * Standard library
 * Specialized datatypes as alternative to: dict, list, set and tuple
 * The notable ones:
@@ -342,7 +342,7 @@ print(combined_zip_list)
   * OrderedDict: dict that retain order of entries
   * defaultdict: dict that calls a factory function to supply missing values
 
-#### collections.Counter()
+## collections.Counter()
 We want to count the number each value appears in a list. The non-pythonic approach, and not efficient:
 ```py
 names = ['Bulbasaur','Charmander','Squirtle','Bulbasaur','Charmander','Squirtle','Bulbasaur']
@@ -361,7 +361,7 @@ from collections import Counter
 type_counts = Counter(names)
 print(type_counts)
 ```
-### itertools Module
+## itertools Module
 * Part of standard libraries
 * Functional tools for creating iterators
 * te notable ones:
@@ -369,7 +369,7 @@ print(type_counts)
   * Finite iterators: accumnulate, chain, zip_longest
   * Combination generators: product, permutation, combinations
 
-#### itertools.Combinations()
+## itertools.Combinations()
 If we want to create all possible combinations, we could do it with for loops, but it is not very efficient:
 ```py
 names = ['Bulbasaur','Charmander','Squirtle','Pikachu']
@@ -394,7 +394,7 @@ combos_exp = [*combos]
 print(combos_exp)
 ```
 
-### Set Theoty
+## Set Theoty
 We oftenlly want to compare collection of objects, it works better with set types.
 * Python has built-in set datatype with some mehtods:
   * intersection(): check if all elements are in both sets
@@ -405,7 +405,7 @@ Sets are used for efficient membership testing:
 * Check if a value exisst in a sequence or not
 * use in operator in sets are more perfomrnat than using in regular lists
 
-#### Comparing Objects
+## Comparing Objects
 We could use a logical for loop to find elements present in both lists:
 ```py
 names_a = ['Bulbasaur','Charmander','Squirtle','Pikachu']
@@ -440,7 +440,7 @@ set_a.union(set_b)
 ```
 Use set also to create unique list, instead of creating for loops to check if an intem in a list is new or not.
 
-### Eliminating Loops
+## Eliminating Loops
 Looping is a common practice in python. There are few patterns:
 * for loops: iterate over a sequence puece-by-piece
 * while loop: iterate until a condition is met
@@ -477,7 +477,7 @@ sum_np = stats.sum(axis=1)
 print(sum_np)
 ```
 
-### Writting Better Loops
+## Writting Better Loops
 There are times where loops as unavoidable! So, follow some good practices for writting loops:
 * Understand what is being done with each loop iteration
 * Move one-time calculations outside (above) the loop
@@ -522,6 +522,7 @@ poke_data = print([*map(list, poke_data_tuples)])
 ```
 Use the timeit function to compare both performances!
 
+# Basic Pandas Otimization
 ## Intro to pandas DataFrame iteration
 So far we used only standard libraries data, now we gonna use pandas lib and define the best practices for iterating over pandas. To recap:
 * Pandas in a data analysis Lib
@@ -541,7 +542,7 @@ data = [
 baseball_df = pd.DataFrame(data,columns = ['Team','League','Year','RS',"RA","W",'G','Playoffs'])
 df
 ```
-### Calculating win percentage
+## Calculating win percentage
 Let's say we want to cerate a column called win_percentage in our DF. First, create the formula to do the calculation.The formula to calculate win percentage is:
 ```py
 import numpy as np
@@ -579,3 +580,42 @@ for i,row in baseball_df.iterrows():
 baseball_df['WP'] = win_perc_list
 ```
 The iterrows module saved 1 line in the code, but turned it in much more efficient, because I don't need to create my indexes, they are given by the function.
+
+Nice work! Since .iterrows() returns each DataFrame row as a tuple of (index, pandas Series) pairs, you can either split this tuple and use the index and row-values separately (as you did with for i,row in pit_df.iterrows()), or you can keep the result of .iterrows() in the tuple form (as you did with for row_tuple in pit_df.iterrows()).
+
+If using i,row, you can access things from the row using square brackets (i.e., row['Team']). If using row_tuple, you would have to specify which element of the tuple you'd like to access before grabbing the team name (i.e., row_tuple[1]['Team']).
+
+With either approach, using .iterrows() will still be substantially faster than using .iloc.
+
+## Another iterator method: **.itertuples()**
+* It is similar to iterrows, but usually more efficient
+* Iterrows deliver a tuple taht you can access by row[index]
+* itertuples deliver a special data type called named tuple, and you can access via . notation  
+Coparing the efficiency:
+```py
+%%timeit
+for row_tuple in baseball_df.iterrows():
+  print(row_tuple)
+```
+versus
+```py
+%%timeit
+for row_namedtuple in baseball_df.itertuples():
+  print(row_namedtuple)
+```
+SIGNIFICANT GAIN!  
+Reason: iterrows stored the data in pandas series which are more complez then named tuples.
+
+### Accesing data: iterrows x itertuples
+To access data in iterrows, use the bracket notation:
+```py
+for row_tuple in baseball_df.iterrows():
+  # Access the column team
+  print(row_tuple[1]['TEAM'])
+```
+Same in itertuples use the . (dot) notation:
+```py
+for row_tuple in baseball_df.itertuples():
+  # Access the column team
+  print(row_tuple.Team)
+```
