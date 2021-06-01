@@ -677,3 +677,23 @@ Great work! The .apply() method let's you apply functions to all rows or columns
 If you've been using pandas for some time, you may have noticed that a better way to find these stats would use the pandas built-in .sum() method.
 You could have used rays_df.sum(axis=0) to get columnar sums and rays_df[['RS', 'RA']].sum(axis=1) to get row sums.
 You could have also used .apply() directly on a Series (or column) of the DataFrame. For example, you could use rays_df['Playoffs'].apply(text_playoffs) to convert the 'Playoffs' column to text.
+
+## Optimal pandas iterating
+Let's use some pandas internal functions to avoid using iterations, and gain even more performance.
+* Pandas is built on top of numpy
+* So, we can take advantage of numpy array efficiency, like using broadcast (vertorized calculation performed in all elements at once)
+Continuing with the baseball df, since it pandas df, we can acces each column as numpy array:
+```py
+# accessing the values
+win_np = baseball_df['W'].values
+# checking that win_np is a numpy array
+print(type(win_np))
+```
+Now, we can perform calculation in a vectorized numpy array, which is quite performing.   
+Let's calculate the run_diffs using a vector:
+```py
+run_diffs_np = baseball_df['RS'].values - baseball_df['RA'].values
+baseball_df['RD'] = run_diffs_np
+print(baseball_df)
+``` 
+The result is the same, but if you time it comparing to the iloc,iterrows or itertuples, it is more efficient.
