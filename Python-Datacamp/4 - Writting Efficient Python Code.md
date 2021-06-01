@@ -619,3 +619,58 @@ for row_tuple in baseball_df.itertuples():
   # Access the column team
   print(row_tuple.Team)
 ```
+## Pandas Alternative to Looping:
+As an even more efficient way to iterate without for loops, pandas offer the **.apply()** method.
+It acts as the **map()** function we have seen before.
+* Apply the a function to a dataframe
+* must specify the axys (0 to apply the function on columns, 1 to applu in rows)
+* Can be used with lambda function
+Let's refactor the iterrows() used the example *Calculating win percentage* !  
+BEFORE:   
+```py
+win_perc_list = []
+
+for i,row in baseball_df.iterrows():
+  wins = row['W']
+  games_played = row['G']
+  # calc_win_percentage is a functioncreated before
+  win_perc = calc_win_perc(wins, games_played)
+  win_perc_list.append(win_perc)
+baseball_df['WP'] = win_perc_list
+```
+AFTER:  
+```py
+wp = baseball_df.apply(
+  lambda row: calc_win_percentage(row['W'],row['G'])
+  ,axis = 1
+)
+baseball_df['WP'] = wp
+```
+IF you compare both executions with timeit, you gonna see that using apply is even more efficient.
+### Exercise:
+Apply sum to each column using apply:
+```py
+# Gather sum of all columns
+stat_totals = baseball_df.apply(sum, axis=0)
+print(stat_totals)
+```
+Apply sum to just 2 rows in a df, using apply:
+```py
+# Gather total runs scored in all games per year
+total_runs_scored = baseball_df[['RS', 'RA']].apply(sum, axis=1)
+print(total_runs_scored)
+```
+Use if function to convert number to text:
+```py
+# creating our function
+def text_playoffs(num_playoffs): 
+    if num_playoffs == 1:
+        return 'Yes'
+    else:
+        return 'No' 
+
+# Convert numeric playoffs to text by applying text_playoffs()
+textual_playoffs = baseball_df.apply(lambda row: text_playoffs(row['Playoffs']), axis=1)
+print(textual_playoffs)
+
+
