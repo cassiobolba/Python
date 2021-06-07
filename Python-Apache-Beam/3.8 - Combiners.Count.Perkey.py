@@ -2,14 +2,14 @@ import apache_beam as beam
 
 p1 = beam.Pipeline()
 
-Delayed_num = (
+Qtd_Atrasos = (
     p1
-    | "Import Data" >> beam.io.ReadFromText("flights_sample.csv", skip_header_lines = 1)
-    | "Split by comma" >> beam.Map(lambda record: record.split(','))
-    | "Filter Delays" >> beam.Filter(lambda record: int(record[8]) > 0 )
-    | "Create a key-value" >> beam.Map(lambda record: (record[4],int(record[8])))
-    | "Count Per key" >> beam.combiners.Count.PerKey()
-    | "Print Results" >> beam.Map(print)
+    | "Importar Dados" >> beam.io.ReadFromText("voos_sample.csv", skip_header_lines = 1)
+    | "Separar por Vírgulas" >> beam.Map(lambda record: record.split(','))
+    | "Pegar voos de Los Angeles" >> beam.Filter(lambda record: int(record[8]) > 0 )
+    | "Criar par" >> beam.Map(lambda record: (record[4],int(record[8])))
+    | "Contar por key" >> beam.combiners.Count.PerKey()
+    | "Mostrar Resultados" >> beam.Map(print)
 )
 
 p1.run()

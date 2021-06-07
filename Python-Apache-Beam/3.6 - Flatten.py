@@ -2,16 +2,13 @@ import apache_beam as beam
 
 p = beam.Pipeline()
 
-black = ('Adão','Jesus','Mike')
-White = ('Tulio','Mary','Joca')
-first_nations = ('Vic','Marta','Tom')
+negros = ('Adão','Jesus','Mike')
+brancos = ('Tulio','Mary','Joca')
+indios = ('Vic','Marta','Tom')
 
-black_pc = p | "Creating Pcollection black" >> beam.Create(black)
-White_pc = p | "Creating Pcollection White" >> beam.Create(White)
-first_nations_pc = p | "Creating Pcollection first_nations" >> beam.Create(first_nations)
+negros_pc = p | "Criando Pcollection negros" >> beam.Create(negros)
+brancos_pc = p | "Criando Pcollection brancos" >> beam.Create(brancos)
+indios_pc = p | "Criando Pcollection indios" >> beam.Create(indios)
 
-people = (
-    (black_pc,White_pc,first_nations_pc) 
-        | beam.Flatten()
-        | beam.Map(print))
+pessoas = ((negros_pc,brancos_pc,indios_pc) | beam.Flatten()) | beam.Map(print)
 p.run()

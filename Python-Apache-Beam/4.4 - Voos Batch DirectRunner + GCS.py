@@ -1,4 +1,8 @@
 import apache_beam as beam
+import os
+
+serviceAccount = r'C:\Users\cassi\Google Drive\GCP\Dataflow Course\Meu_Curso\curso-dataflow-beam-315923-4d903d955091.json'
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = serviceAccount
 
 p1 = beam.Pipeline()
 
@@ -14,7 +18,6 @@ Tempo_Atrasos = (
   | "Pegar voos com atraso" >> beam.ParDo(filtro())
   | "Criar par atraso" >> beam.Map(lambda record: (record[4],int(record[8])))
   | "Somar por key" >> beam.CombinePerKey(sum)
-#  | "Mostrar Resultados" >> beam.Map(print)
 )
 
 Qtd_Atrasos = (
@@ -24,13 +27,12 @@ Qtd_Atrasos = (
   | "Pegar voos com Qtd" >> beam.ParDo(filtro())
   | "Criar par Qtd" >> beam.Map(lambda record: (record[4],int(record[8])))
   | "Contar por key" >> beam.combiners.Count.PerKey()
-#  | "Mostrar Resultados QTD" >> beam.Map(print)
 )
 
 tabela_atrasos = (
     {'Qtd_Atrasos':Qtd_Atrasos,'Tempo_Atrasos':Tempo_Atrasos} 
     | "Group By" >> beam.CoGroupByKey()
-    | beam.Map(print)
+    | "Saida Para GCP" >> beam.io.WriteToText(r"gs://curso-apache-beam/Voos_atrados_qtd.csv")
 )
 
 p1.run()

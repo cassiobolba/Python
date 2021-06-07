@@ -4,9 +4,9 @@ p1 = beam.Pipeline()
 
 voos = (
 p1
-  | "Import Data" >> beam.io.ReadFromText("flights_sample.csv", skip_header_lines = 1)
-  | "Split by comma" >> beam.Map(lambda record: record.split(','))
-  | "Write Results" >> beam.io.WriteToText("Flights.txt")
+  | "Importar Dados" >> beam.io.ReadFromText("voos_sample.csv", skip_header_lines = 1)
+  | "Separar por Vírgulas" >> beam.Map(lambda record: record.split(','))
+  | "Gravar Resultado" >> beam.io.WriteToText("voos.txt")
 )
 
 p1.run()

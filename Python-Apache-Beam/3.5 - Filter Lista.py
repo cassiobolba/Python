@@ -1,18 +1,18 @@
 import apache_beam as beam
 
-words=['quatro','um']
+palavras=['quatro','um']
 
-def FindWords( i ):
- if i in words:
+def encontrarPalavras( i ):
+ if i in palavras:
     return True
 
 p1 = beam.Pipeline()
 
 Collection = (
     p1
-    |beam.io.ReadFromText('Poem.txt')
+    |beam.io.ReadFromText('poema.txt')
     |beam.FlatMap(lambda record: record.split(' '))
-    |beam.Filter(FindWords)
-    |beam.io.WriteToText('results.txt')
+    |beam.Filter(encontrarPalavras)
+    |beam.io.WriteToText('resultado.txt')
 )
 p1.run()
